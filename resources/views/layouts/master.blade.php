@@ -100,7 +100,7 @@
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <!-- Optionally, you can add icons to the links -->
-                    <li class="{{ strstr(\Request::route()->getName(), 'tasks') ? 'active' : '' }}"><a href="#"><i class="fa fa-check-square"></i></i> <span>To-Do</span></a></li>
+                    <li class="{{ strstr(\Request::route()->getName(), 'tasks') ? 'active' : '' }}"><a href="{{ route('tasks.index') }}"><i class="fa fa-check-square"></i></i> <span>To-Do</span></a></li>
                     <li class="{{ strstr(\Request::route()->getName(), 'categories') ? 'active' : '' }}"><a href="{{ route('categories.index') }}"><i class="fa fa-bookmark"></i> <span>Categories</span></a></li>
                 </ul>
                 <!-- /.sidebar-menu -->
