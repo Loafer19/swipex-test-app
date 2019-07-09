@@ -22,3 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('categories', 'CategoriesController')->except(['create', 'show'])->middleware('auth');
 
 Route::resource('tasks', 'TasksController')->except(['create'])->middleware('auth');
+
+Route::patch('tasks\{task}\complete', 'TaskStatusController@complete')->name('tasks.done')->middleware('auth');

@@ -21,17 +21,29 @@
                             <th>#</th>
                             <th>Title</th>
                             <th>Category</th>
+                            <th>Completed</th>
                             <th>Modify</th>
                         </tr>
-                            @foreach ($tasks as $key => $item)
+                            @foreach ($tasks as $key => $task)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td><a href="{{ route('tasks.show',$item->id) }}">{{ $item->title }}</a></td>
-                                    <td>{{ $item->category ? $item->category->title : '-' }}</td>
-                                    <td>
-                                        <a href="{{ route('tasks.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                    <td><a href="{{ route('tasks.show',$task->id) }}">{{ $task->title }}</a></td>
+                                    <td>{{ $task->category ? $task->category->title : '-' }}</td>
+                                    <td>{!! $task->complete ? '<span class="label label-success">Yes</span>' : '<span class="label label-danger">No</span>' !!}</td>
 
-                                        <form class="form-delete" action="{{ route('tasks.destroy', $item->id) }}" method="post" style="display: inline;">
+                                    <td>
+                                        @if (!$task->complete)
+                                            <form class="form-delete" action="{{ route('tasks.done', $task->id) }}" method="post" style="display: inline;">
+                                                @method('PATCH')
+                                                @csrf
+
+                                                <button type="submit" class="btn btn-sm btn-info" onclick="return confirm('Are you sure?')">Complete</button>
+                                            </form>
+                                        @endif
+
+                                        <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-sm btn-warning">Edit</a>
+
+                                        <form class="form-delete" action="{{ route('tasks.destroy', $task->id) }}" method="post" style="display: inline;">
                                             @method('DELETE')
                                             @csrf
 
