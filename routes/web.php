@@ -19,6 +19,6 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('categories', 'CategoriesController')->except(['create', 'show']);
+Route::resource('categories', 'CategoriesController')->except(['create', 'show'])->middleware('auth');
 
-Route::resource('tasks', 'TasksController')->except(['create']);
+Route::resource('tasks', 'TasksController')->except(['create'])->middleware('auth');

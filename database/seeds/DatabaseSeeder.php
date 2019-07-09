@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,6 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class)->create();
+        factory(User::class)->create()->categories()->saveMany(
+            factory(Category::class, 10)->make()
+        );
     }
 }

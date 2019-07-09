@@ -13,6 +13,9 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @yield('styles')
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -22,7 +25,7 @@
         <header class="main-header">
 
             <!-- Logo -->
-            <a href="" class="logo">
+            <a href="{{ route('home') }}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini">TDL</span>
                 <!-- logo for regular state and mobile devices -->
@@ -97,8 +100,8 @@
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <!-- Optionally, you can add icons to the links -->
-                    <li class="active"><a href="#"><i class="fa fa-check-square"></i></i> <span>To-Do</span></a></li>
-                    <li><a href="#"><i class="fa fa-bookmark"></i> <span>Categories</span></a></li>
+                    <li class="{{ strstr(\Request::route()->getName(), 'tasks') ? 'active' : '' }}"><a href="#"><i class="fa fa-check-square"></i></i> <span>To-Do</span></a></li>
+                    <li class="{{ strstr(\Request::route()->getName(), 'categories') ? 'active' : '' }}"><a href="{{ route('categories.index') }}"><i class="fa fa-bookmark"></i> <span>Categories</span></a></li>
                 </ul>
                 <!-- /.sidebar-menu -->
             </section>
@@ -110,15 +113,16 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Page Header
-                    <small>Optional description</small>
+                    @yield('page')
                 </h1>
             </section>
 
             <!-- Main content -->
             <section class="content container-fluid">
 
+                @include('layouts\_messages')
 
+                @yield('content')
 
             </section>
             <!-- /.content -->
@@ -138,5 +142,8 @@
     </div>
 
     <script src="{{ asset('js/app.js') }}"></script>
+
+    @yield('scripts')
+
 </body>
 </html>

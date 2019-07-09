@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CategoryRequest;
 
 class CategoriesController extends Controller
 {
@@ -14,7 +16,11 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+
+        $categories = $user->categories()->paginate(10);
+
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -23,9 +29,13 @@ class CategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $user = Auth::user();
+
+        $user->categories()->create($request->all());
+
+        return back()->with('success', "Category created successfully!");
     }
 
     /**
@@ -36,7 +46,7 @@ class CategoriesController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -46,9 +56,11 @@ class CategoriesController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
-        //
+        $category->update($request->all());
+
+        return redirect()->route('categories.index')->with('success', "Category updated successfully!");
     }
 
     /**
@@ -59,6 +71,8 @@ class CategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return back()->with('success', "Category deleted successfully!");
     }
 }
