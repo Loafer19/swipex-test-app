@@ -3,7 +3,7 @@
 @section('page', 'Tasks')
 
 @section('content')
-@include('tasks\modals\_create')
+@include('tasks.modals._create')
 
     <div class="box">
         <div class="box-header with-border">
@@ -12,7 +12,7 @@
                 <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createModal">Create</button>
             </div>
         </div>
-        <!-- /.box-header -->
+
         <div class="box-body">
             @if ($tasks->count())
                 <table class="table table-bordered">
@@ -22,7 +22,9 @@
                             <th>Title</th>
                             <th>Category</th>
                             <th>Completed</th>
-                            <th>Modify</th>
+                            <th>Complete</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                             @foreach ($tasks as $key => $task)
                                 <tr>
@@ -40,9 +42,11 @@
                                                 <button type="submit" class="btn btn-sm btn-info" onclick="return confirm('Are you sure?')">Complete</button>
                                             </form>
                                         @endif
-
+                                    </td>
+                                    <td>
                                         <a href="{{ route('tasks.edit', $task->id) }}" class="btn btn-sm btn-warning">Edit</a>
-
+                                    </td>
+                                    <td>
                                         <form class="form-delete" action="{{ route('tasks.destroy', $task->id) }}" method="post" style="display: inline;">
                                             @method('DELETE')
                                             @csrf
@@ -58,7 +62,7 @@
                 <h2>No tasks</h2>
             @endif
         </div>
-        <!-- /.box-body -->
+
         <div class="box-footer clearfix">
             {{ $tasks->links() }}
         </div>

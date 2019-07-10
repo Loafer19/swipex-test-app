@@ -3,7 +3,7 @@
 @section('page', 'Categories')
 
 @section('content')
-@include('categories\modals\_create')
+@include('categories.modals._create')
 
     <div class="box">
         <div class="box-header with-border">
@@ -12,7 +12,7 @@
                 <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#createModal">Create</button>
             </div>
         </div>
-        <!-- /.box-header -->
+
         <div class="box-body">
             @if ($categories->count())
                 <table class="table table-bordered">
@@ -20,7 +20,8 @@
                         <tr>
                             <th>#</th>
                             <th>Title</th>
-                            <th>Modify</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                             @foreach ($categories as $key => $item)
                                 <tr>
@@ -28,7 +29,8 @@
                                     <td>{{ $item->title }}</td>
                                     <td>
                                         <a href="{{ route('categories.edit', $item->id) }}" class="btn btn-sm btn-warning">Edit</a>
-
+                                    </td>
+                                    <td>
                                         <form class="form-delete" action="{{ route('categories.destroy', $item->id) }}" method="post" style="display: inline;">
                                             @method('DELETE')
                                             @csrf
@@ -44,7 +46,7 @@
                 <h2>No categories</h2>
             @endif
         </div>
-        <!-- /.box-body -->
+
         <div class="box-footer clearfix">
             {{ $categories->links() }}
         </div>

@@ -9,6 +9,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <link rel="shortcut icon" href="{{ asset('images/rocket.png') }}" type="image/x-icon">
+
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
@@ -79,10 +81,9 @@
                 </div>
             </nav>
         </header>
+
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
-
-            <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
 
                 <!-- Sidebar user panel (optional) -->
@@ -99,18 +100,14 @@
 
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    <!-- Optionally, you can add icons to the links -->
                     <li class="{{ strstr(\Request::route()->getName(), 'tasks') ? 'active' : '' }}"><a href="{{ route('tasks.index') }}"><i class="fa fa-check-square"></i></i> <span>To-Do</span></a></li>
                     <li class="{{ strstr(\Request::route()->getName(), 'categories') ? 'active' : '' }}"><a href="{{ route('categories.index') }}"><i class="fa fa-bookmark"></i> <span>Categories</span></a></li>
                 </ul>
-                <!-- /.sidebar-menu -->
             </section>
-            <!-- /.sidebar -->
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
                     @yield('page')
@@ -120,14 +117,12 @@
             <!-- Main content -->
             <section class="content container-fluid">
 
-                @include('layouts\_messages')
+                @include('layouts._messages')
 
                 @yield('content')
 
             </section>
-            <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
 
         <!-- Main Footer -->
         <footer class="main-footer">
