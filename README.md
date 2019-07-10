@@ -20,3 +20,9 @@
 * Driver: MySQL or SQLite;
 * Admin Template "https://adminlte.io/themes/AdminLTE/index2.html" 
 * Site Template Vue.js "vuetifyjs" or Blade "Bootstrap".
+
+### Що вийшло?
+
+![Tasks screenshot](/public/images/screenshots/2019-07-10_192057.jpg)
+
+![Tasks create screenshot](/public/images/screenshots/2019-07-10_192128.jpg)
